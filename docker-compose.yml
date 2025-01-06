@@ -1,8 +1,15 @@
 services:
   coturn:
     build: .
-#    environment:
-#      - ./turnserver.conf=/etc/turnserver.conf
+    environment:
+      - LISTENING_PORT=${LISTENING_PORT}
+      - LISTENING_IP=${LISTENING_IP}
+      - USER1=${USER1}
+      - USER2=${USER2}
+      - USER3=${USER3}
+      - CLI_PASSWORD=${CLI_PASSWORD}
+      - MIN_PORT=${MIN_PORT}
+      - MAX_PORT=${MAX_PORT}
     volumes:
       - ./turnserver.conf:/etc/turnserver.conf
     network_mode: "host"
