@@ -12,5 +12,6 @@ RUN service coturn stop
 
 #/etc/default/coturn -> TURNSERVER_ENABLED=1
 COPY .env /etc/environment
+COPY turnserver.conf /etc/turnserver.conf.template
 
-CMD envsubst < /etc/turnserver.conf > /etc/turnserver.conf && service coturn start && tail -f /dev/null
+CMD envsubst < /etc/turnserver.conf.template > /etc/turnserver.conf && service coturn start && tail -f /dev/null
