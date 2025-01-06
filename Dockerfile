@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 RUN apt update
-RUN apt install coturn -y
+RUN apt install coturn gettext -y
 
 RUN sed -i "s/USER=turnserver/USER=root/" /etc/init.d/coturn
 RUN sed -i "s/GROUP=turnserver/GROUP=root/" /etc/init.d/coturn
@@ -11,4 +11,6 @@ RUN service coturn stop
 #RUN service coturn start
 
 #/etc/default/coturn -> TURNSERVER_ENABLED=1
-CMD service coturn start && tail -f /dev/null
+COPY .env /etc/environment
+
+CMD envsubst < /etc/turnserver.conf > /etc/turnserver.conf && service coturn start && tail -f /dev/null

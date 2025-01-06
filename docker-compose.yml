@@ -1,6 +1,8 @@
 services:
   coturn:
     build: .
+    env_file:
+      - .env
     environment:
       - LISTENING_PORT=${LISTENING_PORT}
       - LISTENING_IP=${LISTENING_IP}
